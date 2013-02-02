@@ -3,12 +3,12 @@
    Plugin Name: Test Plugin
    Plugin URI:  https://github.com/ronakg/wp-plugin-auto-update
    Description: A test plugin to demo wp-plugin-auto-update script
-   Version: 1.3
+   Version: 1.4
    Author: Ronak Gandhi
    Author URI: http://www.ronakg.com
    License: GPL2
 
-   Copyright 2011 Plugin Author (email : user@example.com)
+   Copyright 2013 Plugin Author (email : user@example.com)
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License, version 2, as
@@ -27,7 +27,7 @@
 define('DEBUG', false);
 
 class WpPluginAutoUpdate {
-    # URL to check for updates, this is where the index.php script goes
+    # THE FOLLOWING SHOULD NOT NOT BE EDITED, EDIT THE URL MUCH FURTHER DOWN 
     public $api_url;
 
     # Type of package to be updated
@@ -102,6 +102,8 @@ class WpPluginAutoUpdate {
     public function prepare_request($action, $args) {
         $site_url = site_url();
 
+        global $wp_version;
+
         $wp_info = array(
             'site-url' => $site_url,
             'version' => $wp_version,
@@ -118,7 +120,9 @@ class WpPluginAutoUpdate {
     }
 }
 
-$wp_plugin_auto_update = new WpPluginAutoUpdate('http://www.ronakg.com/wp_plugin_auto_update/', 'stable', basename(dirname(__FILE__)));
+// EDIT HERE
+// Replace the following URL with your own URL (where the index.php and the .ini is stored), and optionally change 'stable' to your package type.
+$wp_plugin_auto_update = new WpPluginAutoUpdate('http://www.yoursitehere.com/wp_plugin/', 'stable', basename(dirname(__FILE__)));
 
 if (DEBUG) {
     // Enable update check on every request. Normally you don't need 
